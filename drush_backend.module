@@ -1,0 +1,19 @@
+<?php
+
+function drush_backend_views_links($module) {
+  $items =  array();
+  if ($feature = features_load_feature($module)) {
+    if (isset($feature->info['features']['views_view'])) {
+      $views = $feature->info['features']['views_view'];
+      foreach ($views as $name) {
+        $view = views_get_view($name);
+        foreach ($view->display as $type => $display) {
+          if ($display->display_plugin == 'page') {
+            $items[$display->display_options['path']] =  $name;
+          }
+        }
+      }
+    }
+  }
+  return $items;
+}

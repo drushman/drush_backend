@@ -1,0 +1,3 @@
+name = Drush Backend
+description = Extra drush command
+core = 7.x
